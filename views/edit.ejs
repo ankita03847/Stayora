@@ -1,0 +1,65 @@
+<%- layout('/layouts/boilerplate') -%>
+<div class="row my-4">
+  <div class="col-lg-8 offset-lg-2 col-12">
+    <h3 class="fw-bold mb-4">Edit Listing</h3>
+    <form method="POST" action="/listing/<%= listing._id %>?_method=PUT" enctype="multipart/form-data" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="title" class="form-label fw-semibold">Title</label>  
+        <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control" required>
+        <div class="invalid-feedback">Please enter a title.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label fw-semibold">Description</label>  
+        <textarea name="listing[description]" rows="4" class="form-control" required><%= listing.description %></textarea>
+        <div class="invalid-feedback">Please enter a description.</div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="category" class="form-label fw-semibold">Category</label>
+          <select name="listing[category]" class="form-select" required>
+            <% const categories = ["Beach", "Windmills", "Modern", "Countryside", "Pools", "Islands", "Lake", "Skiing", "Castles", "Caves", "Camping", "Arctic", "Desert", "Barns", "Lux"]; %>
+            <% for(let cat of categories) { %>
+              <option value="<%= cat %>" <%= listing.category === cat ? 'selected' : '' %>><%= cat %></option>
+            <% } %>
+          </select>
+        </div>
+
+        <div class="mb-3 col-md-6">
+          <label for="image" class="form-label fw-semibold">Upload New Image (Optional)</label>  
+          <input name="image" type="file" class="form-control" accept="image/*">
+        </div>
+      </div>
+
+      <% if(listing.image && listing.image.url) { %>
+        <div class="mb-3">
+          <label class="form-label d-block fw-semibold">Current Image</label>
+          <img src="<%= listing.image.url %>" alt="listing_image" style="height: 160px; width: 220px; object-fit: cover; border-radius: 12px;">
+        </div>
+      <% } %>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label fw-semibold">Price per night ($)</label>  
+          <input name="listing[price]" value="<%= listing.price %>" type="number" class="form-control" required min="0">
+          <div class="invalid-feedback">Please enter a valid price.</div>
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label for="location" class="form-label fw-semibold">Location / City</label>  
+          <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control" required>
+          <div class="invalid-feedback">Please enter the location.</div> 
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label for="country" class="form-label fw-semibold">Country</label>  
+          <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control" required>
+          <div class="invalid-feedback">Please enter the country.</div>
+        </div>
+      </div>
+
+      <button class="btn btn-danger px-4 py-2 rounded-pill fw-semibold mb-3" type="submit">Update Listing</button>
+    </form>
+  </div>
+</div>

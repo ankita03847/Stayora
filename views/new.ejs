@@ -1,0 +1,72 @@
+<%- layout('/layouts/boilerplate') -%>
+<div class="row my-4">
+  <div class="col-lg-8 offset-lg-2 col-12">
+    <h3 class="fw-bold mb-4">Create a New Listing</h3>
+    <form method="POST" action="/listing" enctype="multipart/form-data" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="title" class="form-label fw-semibold">Title</label>
+        <input name="listing[title]" placeholder="e.g. Cozy Beachfront Villa" type="text" class="form-control" required>
+        <div class="invalid-feedback">Please enter a title.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label fw-semibold">Description</label>
+        <textarea name="listing[description]" placeholder="Describe your stay, amenities, and surroundings..." rows="4" class="form-control" required></textarea>    
+        <div class="invalid-feedback">Please enter a description.</div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="category" class="form-label fw-semibold">Category</label>
+          <select name="listing[category]" class="form-select" required>
+            <option value="Beach" selected>Beach</option>
+            <option value="Windmills">Windmills</option>
+            <option value="Modern">Modern</option>
+            <option value="Countryside">Countryside</option>
+            <option value="Pools">Pools</option>
+            <option value="Islands">Islands</option>
+            <option value="Lake">Lake</option>
+            <option value="Skiing">Skiing</option>
+            <option value="Castles">Castles</option>
+            <option value="Caves">Caves</option>
+            <option value="Camping">Camping</option>
+            <option value="Arctic">Arctic</option>
+            <option value="Desert">Desert</option>
+            <option value="Barns">Barns</option>
+            <option value="Lux">Lux</option>
+          </select>
+        </div>
+
+        <div class="mb-3 col-md-6">
+          <label for="image" class="form-label fw-semibold">Upload Image</label>
+          <input name="image" type="file" class="form-control" accept="image/*" required>
+          <div class="invalid-feedback">Please upload an image.</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label fw-semibold">Price per night ($)</label>
+          <input name="listing[price]" placeholder="120" type="number" class="form-control" min="1" required>
+          <div class="invalid-feedback">Please enter a valid price.</div>
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label for="location" class="form-label fw-semibold">Location / City</label>
+          <input name="listing[location]" placeholder="e.g. Aspen, Colorado" type="text" class="form-control" required>
+          <div class="invalid-feedback">Please enter the location.</div>
+        </div>
+
+        <div class="mb-3 col-md-4">
+          <label for="country" class="form-label fw-semibold">Country</label>
+          <input name="listing[country]" placeholder="e.g. United States" type="text" class="form-control" required>
+          <div class="invalid-feedback">Please enter the country.</div>
+        </div>
+      </div>
+
+      <button class="btn btn-danger px-4 py-2 rounded-pill fw-semibold mt-2" type="submit">
+        Create Listing
+      </button>
+    </form>
+  </div>
+</div>

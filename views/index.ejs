@@ -1,0 +1,143 @@
+<%- layout('/layouts/boilerplate') -%>
+
+<!-- Category Icon Filter Bar -->
+<div class="category-filter-container py-3">
+  <div class="category-scroll-wrapper">
+    <a href="/listing" class="category-item <%= activeCategory === 'all' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-globe"></i></div>
+      <span class="category-label">All</span>
+    </a>
+    <a href="/listing?category=Beach" class="category-item <%= activeCategory === 'Beach' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+      <span class="category-label">Beach</span>
+    </a>
+    <a href="/listing?category=Windmills" class="category-item <%= activeCategory === 'Windmills' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-wind"></i></div>
+      <span class="category-label">Windmills</span>
+    </a>
+    <a href="/listing?category=Modern" class="category-item <%= activeCategory === 'Modern' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-city"></i></div>
+      <span class="category-label">Modern</span>
+    </a>
+    <a href="/listing?category=Countryside" class="category-item <%= activeCategory === 'Countryside' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-mountain"></i></div>
+      <span class="category-label">Countryside</span>
+    </a>
+    <a href="/listing?category=Pools" class="category-item <%= activeCategory === 'Pools' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-person-swimming"></i></div>
+      <span class="category-label">Pools</span>
+    </a>
+    <a href="/listing?category=Islands" class="category-item <%= activeCategory === 'Islands' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-tree"></i></div>
+      <span class="category-label">Islands</span>
+    </a>
+    <a href="/listing?category=Lake" class="category-item <%= activeCategory === 'Lake' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-water"></i></div>
+      <span class="category-label">Lake</span>
+    </a>
+    <a href="/listing?category=Skiing" class="category-item <%= activeCategory === 'Skiing' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-person-skiing"></i></div>
+      <span class="category-label">Skiing</span>
+    </a>
+    <a href="/listing?category=Castles" class="category-item <%= activeCategory === 'Castles' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-chess-rook"></i></div>
+      <span class="category-label">Castles</span>
+    </a>
+    <a href="/listing?category=Caves" class="category-item <%= activeCategory === 'Caves' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+      <span class="category-label">Caves</span>
+    </a>
+    <a href="/listing?category=Camping" class="category-item <%= activeCategory === 'Camping' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-campground"></i></div>
+      <span class="category-label">Camping</span>
+    </a>
+    <a href="/listing?category=Arctic" class="category-item <%= activeCategory === 'Arctic' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-regular fa-snowflake"></i></div>
+      <span class="category-label">Arctic</span>
+    </a>
+    <a href="/listing?category=Desert" class="category-item <%= activeCategory === 'Desert' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-sun"></i></div>
+      <span class="category-label">Desert</span>
+    </a>
+    <a href="/listing?category=Barns" class="category-item <%= activeCategory === 'Barns' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-warehouse"></i></div>
+      <span class="category-label">Barns</span>
+    </a>
+    <a href="/listing?category=Lux" class="category-item <%= activeCategory === 'Lux' ? 'active' : '' %>">
+      <div class="category-icon"><i class="fa-solid fa-gem"></i></div>
+      <span class="category-label">Lux</span>
+    </a>
+  </div>
+</div>
+
+<!-- Listings Section -->
+<div class="my-4">
+  <% if(typeof searchQuery !== 'undefined' && searchQuery) { %>
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <h5 class="m-0 text-muted">Search results for "<b><%= searchQuery %></b>"</h5>
+      <a href="/listing" class="btn btn-sm btn-outline-secondary">Clear filter</a>
+    </div>
+  <% } else if(activeCategory && activeCategory !== 'all') { %>
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <h5 class="m-0 text-muted">Category: <b><%= activeCategory %></b></h5>
+      <a href="/listing" class="btn btn-sm btn-outline-secondary">Show all</a>
+    </div>
+  <% } %>
+
+  <% if(allListings && allListings.length > 0) { %>
+    <!-- 5-Column Responsive Grid matching reference image -->
+    <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+      <% for (let listing of allListings){ %>
+        <div class="col">
+          <div class="card listing-card h-100 border-0">
+            <!-- Image Wrapper with floating Wishlist Heart -->
+            <div class="listing-img-wrapper position-relative">
+              <a href="/listing/<%= listing._id %>" class="text-decoration-none">
+                <img 
+                  src="<%= listing.image && listing.image.url ? listing.image.url : '/defaulttravelimg.jpg' %>" 
+                  class="card-img-top listing-card-img" 
+                  alt="<%= listing.title %>"
+                  loading="lazy"
+                />
+              </a>
+              <button 
+                type="button" 
+                class="wishlist-btn" 
+                onclick="toggleWishlist(event, this)" 
+                aria-label="Add to wishlist"
+              >
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </div>
+
+            <!-- Card Body with Location, Category, and Price -->
+            <div class="card-body px-0 pt-3 pb-0">
+              <a href="/listing/<%= listing._id %>" class="text-decoration-none text-dark">
+                <h6 class="card-title fw-bold mb-1 text-truncate">
+                  <%= listing.location %>, <%= listing.country %>
+                </h6>
+              </a>
+              <div class="card-category text-muted small mb-1">
+                <%= listing.category || 'Beach' %>
+              </div>
+              <div class="card-price">
+                <span class="fw-bold">$ <%= listing.price ? listing.price.toLocaleString("en-US") : "0" %></span>
+                <span class="text-muted small"> night</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  <% } else { %>
+    <!-- Empty State -->
+    <div class="text-center py-5">
+      <div class="mb-3">
+        <i class="fa-regular fa-compass fa-3x text-muted"></i>
+      </div>
+      <h4>No listings found</h4>
+      <p class="text-muted">We couldn't find any stays matching your selection. Try browsing all destinations.</p>
+      <a href="/listing" class="btn btn-danger px-4 rounded-pill">View All Listings</a>
+    </div>
+  <% } %>
+</div>

@@ -1,0 +1,123 @@
+<nav class="navbar navbar-expand-md bg-white sticky-top py-3 border-bottom">
+  <div class="container-fluid px-lg-5 px-3">
+    <!-- Brand Logo: Stayora -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/listing">
+      <div class="brand-icon-circle">
+        <i class="fa-solid fa-hotel"></i>
+      </div>
+      <span class="brand-text">Stayora</span>
+    </a>
+
+    <!-- Center Search Pill -->
+    <div class="search-pill-container d-none d-md-flex align-items-center">
+      <form action="/listing" method="GET" class="d-flex align-items-center m-0 w-100">
+        <input 
+          type="text" 
+          name="search" 
+          class="search-pill-input" 
+          placeholder="Anywhere" 
+          value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+        >
+        <div class="search-divider"></div>
+        <span class="search-pill-text">Any week</span>
+        <div class="search-divider"></div>
+        <span class="search-pill-text text-muted">Add Guests</span>
+        <button type="submit" class="search-pill-btn" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- Right Side Actions -->
+    <div class="d-flex align-items-center gap-3">
+      <% if(currUser) { %>
+        <!-- My Bookings Link for Guests -->
+        <a href="/bookings" class="nav-link fw-semibold d-none d-lg-flex align-items-center gap-1">
+          <i class="fa-regular fa-calendar-check text-muted"></i> My Bookings
+        </a>
+
+        <!-- Owner Dashboard Link with Pending Count Badge -->
+        <a href="/dashboard" class="nav-link fw-semibold d-none d-md-flex align-items-center gap-1 position-relative">
+          <i class="fa-solid fa-chart-line text-muted"></i> Dashboard
+          <% if(typeof pendingCount !== 'undefined' && pendingCount > 0) { %>
+            <span class="badge rounded-pill bg-danger ms-1 animate-pulse" title="<%= pendingCount %> pending requests">
+              <%= pendingCount %>
+            </span>
+          <% } %>
+        </a>
+
+        <!-- Host property link -->
+        <a href="/listing/new" class="nav-link host-link fw-semibold d-none d-sm-block">
+          List a Property
+        </a>
+      <% } else { %>
+        <a href="/listing/new" class="nav-link host-link fw-semibold d-none d-sm-block">
+          Become a Host
+        </a>
+      <% } %>
+
+      <!-- Profile Dropdown Pill -->
+      <div class="dropdown">
+        <button 
+          class="btn user-menu-pill dropdown-toggle d-flex align-items-center gap-2" 
+          type="button" 
+          id="userDropdownMenu" 
+          data-bs-toggle="dropdown" 
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bars menu-bars-icon"></i>
+          <div class="user-avatar-circle">
+            <% if(currUser && currUser.username) { %>
+              <span><%= currUser.username.charAt(0).toUpperCase() %></span>
+            <% } else { %>
+              <i class="fa-solid fa-user"></i>
+            <% } %>
+          </div>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2 py-2 user-dropdown-menu" aria-labelledby="userDropdownMenu">
+          <% if(!currUser) { %>
+            <li><a class="dropdown-item fw-semibold" href="/signuser">Sign up</a></li>
+            <li><a class="dropdown-item" href="/loginUser">Log in</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/listing">Explore Properties</a></li>
+            <li><a class="dropdown-item" href="/listing/new">Become a Host</a></li>
+          <% } else { %>
+            <li class="px-3 py-1 text-muted small">Signed in as <b><%= currUser.username %></b></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item fw-semibold" href="/bookings"><i class="fa-regular fa-calendar-check me-2"></i>My Bookings</a></li>
+            <li>
+              <a class="dropdown-item fw-semibold d-flex align-items-center justify-content-between" href="/dashboard">
+                <span><i class="fa-solid fa-chart-line me-2"></i>Owner Dashboard</span>
+                <% if(typeof pendingCount !== 'undefined' && pendingCount > 0) { %>
+                  <span class="badge bg-danger rounded-pill"><%= pendingCount %></span>
+                <% } %>
+              </a>
+            </li>
+            <li><a class="dropdown-item" href="/listing/new"><i class="fa-solid fa-plus me-2"></i>List New Property</a></li>
+            <li><a class="dropdown-item" href="/listing"><i class="fa-solid fa-compass me-2"></i>Explore Stays</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Log out</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Search Bar -->
+  <div class="container-fluid px-3 d-md-none mt-2">
+    <form action="/listing" method="GET" class="w-100">
+      <div class="input-group search-mobile-group">
+        <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-danger"></i></span>
+        <input 
+          type="text" 
+          name="search" 
+          class="form-control border-start-0" 
+          placeholder="Where to? Search destination"
+          value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+        >
+        <button class="btn btn-danger" type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+</nav>
