@@ -1,5 +1,8 @@
 # Stayora — Property Discovery & Booking Platform
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-stayora--vert.vercel.app-success?style=for-the-badge&logo=vercel)](https://stayora-vert.vercel.app)
+[![Sign Up](https://img.shields.io/badge/Get_Started-Sign_Up_Now-ff385c?style=for-the-badge)](https://stayora-vert.vercel.app/signuser)
+
 [![Node.js](https://img.shields.io/badge/Node.js-v18+-green.svg?logo=node.js)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-5.x-lightgrey.svg?logo=express)](https://expressjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas_Cloud-brightgreen.svg?logo=mongodb)](https://www.mongodb.com/atlas)
@@ -9,6 +12,9 @@
 [![License](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
 
 > **Stayora** is a full-stack, two-sided property discovery and reservation marketplace built with Node.js, Express, MongoDB Atlas, and EJS. It bridges the gap between travelers searching for unique holiday stays and property owners managing listings, availability, and reservation requests.
+
+🌐 **Live Application**: [https://stayora-vert.vercel.app](https://stayora-vert.vercel.app)  
+📝 **Sign Up / Register**: [https://stayora-vert.vercel.app/signuser](https://stayora-vert.vercel.app/signuser)
 
 ---
 
@@ -241,6 +247,7 @@ You can add this project to your resume with the following bullet points:
 
 > **Stayora — Property Discovery & Booking Platform**  
 > *Node.js, Express.js, MongoDB Atlas, Mongoose, EJS, Bootstrap 5, Passport.js, Cloudinary*  
+> **Live Demo:** [https://stayora-vert.vercel.app](https://stayora-vert.vercel.app)
 > - Engineered a full-stack, two-sided property discovery and reservation platform with separate guest and property owner workflows.
 > - Developed a date-range availability engine utilizing mathematical overlap algorithms to prevent double-booking across simultaneous reservation requests.
 > - Built a comprehensive Owner Dashboard displaying real-time KPI metrics (Active Properties, Pending Requests, Confirmed Stays, Revenue) with one-click request approval and auto-rejection of conflicting dates.
