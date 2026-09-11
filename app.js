@@ -135,6 +135,10 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+  });
+}
+
+module.exports = app;
